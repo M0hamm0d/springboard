@@ -100,7 +100,7 @@
                 v-for="n in 34"
                 :key="n"
                 :class="['bar-tick', { active: n <= 28 }]"
-                :style="{ transitionDelay: (n * 18) + 'ms' }"
+                :style="{ transitionDelay: n * 18 + 'ms' }"
               ></span>
             </div>
           </div>
@@ -533,6 +533,12 @@ export default {
 
   .card-photo {
     min-height: 280px;
+  }
+  .card-cream {
+    gap: 82px;
+  }
+  .stat-metric-row {
+    margin-bottom: 15px;
   }
 }
 </style>
