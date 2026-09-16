@@ -277,6 +277,9 @@ export default {
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
+  .final-cta-section {
+    padding: 60px 0px 100px;
+  }
   .cta-card {
     padding: 56px 20px;
     border-radius: 18px;
