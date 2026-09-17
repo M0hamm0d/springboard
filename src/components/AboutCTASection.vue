@@ -1,39 +1,52 @@
 <template>
-  <section class="final-cta-section">
+  <section class="about-cta-section">
     <div class="cta-container">
       <div v-reveal:zoom class="cta-card">
-        <!-- Subtle Institutional Watermark/Pattern in Background -->
         <div class="cta-glow-disc"></div>
 
         <div class="cta-content">
-          <!-- Overline Badge -->
-          <span class="cta-pill">Admissions Open For Upcoming Diet</span>
+          <!-- Inner cascade: pill 150ms -> headline 250ms -> subtext 400ms
+               -> actions 550ms -> trust row 700ms, after the card zooms in -->
+          <span v-reveal="{ delay: 150 }" class="cta-pill">Admissions Open For Upcoming Diet</span>
 
           <!-- Main Climax Headline -->
-          <h2 class="cta-headline">
-            Ready to Take the Next Step in Your <br />
-            <span>Accounting Career?</span>
+          <h2 v-reveal="{ delay: 250 }" class="cta-headline">
+            Ready to Start <br />
+            <span>Your Journey?</span>
           </h2>
 
           <!-- Descriptive Subtext -->
-          <p class="cta-subtext">
-            Join Springboard Associates SATC and learn from experienced tutors
-            in an environment built around excellence. Secure your lectures,
-            study packs, and mock exam slots today.
+          <p v-reveal="{ delay: 400 }" class="cta-subtext">
+            Join hundreds of candidates building their careers with
+            Springboard Associates SATC. Explore our ATS and ICAN programmes
+            and take the first step toward becoming a chartered accountant.
           </p>
 
           <!-- Button Actions -->
-          <div class="cta-actions">
-            <button class="btn btn-cream" @click="handleEnroll">
-              Enroll Now
+          <div v-reveal="{ delay: 550 }" class="cta-actions">
+            <button class="btn btn-cream" @click="handleProgrammes">
+              View Our Programmes
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
             </button>
             <button class="btn btn-outline" @click="handleContact">
-              Contact Us
+              Talk to Us
             </button>
           </div>
 
           <!-- Bottom Micro-Trust Bar -->
-          <div class="cta-trust-row">
+          <div v-reveal="{ delay: 700 }" class="cta-trust-row">
             <div class="trust-pill">
               <svg
                 width="14"
@@ -63,7 +76,7 @@
               >
                 <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
-              <span>Physical & Virtual Classes</span>
+              <span>Physical & Online Classes</span>
             </div>
             <span class="trust-sep">•</span>
             <div class="trust-pill">
@@ -79,7 +92,7 @@
               >
                 <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
-              <span>Installment Plans Available</span>
+              <span>Registration to Certification Support</span>
             </div>
           </div>
         </div>
@@ -90,10 +103,10 @@
 
 <script>
 export default {
-  name: "FinalCtaSection",
+  name: "AboutCTASection",
   methods: {
-    handleEnroll() {
-      console.log("Navigate to enrollment application");
+    handleProgrammes() {
+      this.$router.push("/programmes");
     },
     handleContact() {
       console.log("Navigate or scroll to contact section");
@@ -111,7 +124,7 @@ export default {
   padding: 0;
 }
 
-.final-cta-section {
+.about-cta-section {
   width: 100%;
   background-color: #ffffff;
   padding: 60px 24px 100px;
@@ -135,7 +148,7 @@ export default {
   box-shadow: 0 20px 40px -15px rgba(10, 25, 47, 0.18);
 }
 
-/* Soft Warm Glow Behind Text */
+/* Soft Warm Glow Behind Text — breathing halo */
 .cta-glow-disc {
   position: absolute;
   top: -120px;
@@ -143,12 +156,23 @@ export default {
   transform: translateX(-50%);
   width: 500px;
   height: 350px;
-  /* background: radial-gradient(
-    circle,
-    rgba(245, 230, 200, 0.08) 0%,
-    rgba(10, 25, 47, 0) 70%
-  ); */
   pointer-events: none;
+  background: radial-gradient(
+    circle,
+    rgba(245, 230, 200, 0.07) 0%,
+    rgba(10, 25, 47, 0) 70%
+  );
+  animation: glow-breathe 6s ease-in-out infinite;
+}
+
+@keyframes glow-breathe {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% 	{
+    opacity: 1;
+  }
 }
 
 .cta-content {
@@ -220,6 +244,17 @@ export default {
   cursor: pointer;
   transition: all 0.2s ease;
   border: 1px solid transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn svg {
+  transition: transform 0.2s ease;
+}
+
+.btn:hover svg {
+  transform: translateX(4px);
 }
 
 .btn-cream {
@@ -276,10 +311,17 @@ export default {
 }
 
 /* ================= RESPONSIVE ================= */
+@media (prefers-reduced-motion: reduce) {
+  .cta-glow-disc {
+    animation: none;
+  }
+}
+
 @media (max-width: 768px) {
-  .final-cta-section {
+  .about-cta-section {
     padding: 60px 0px 100px;
   }
+
   .cta-card {
     padding: 56px 20px;
     border-radius: 18px;
@@ -301,6 +343,7 @@ export default {
 
   .btn {
     width: 100%;
+    justify-content: center;
   }
 
   .cta-trust-row {

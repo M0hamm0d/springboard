@@ -119,7 +119,7 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700&display=swap");
 
 * {
   box-sizing: border-box;
@@ -133,7 +133,7 @@ export default {
   border-top: 1px solid #e9dfce;
   border-bottom: 1px solid #e9dfce;
   padding: 32px 24px 36px;
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "DM Sans", "DM Sans Fallback", "DM Sans", system-ui, sans-serif;
 }
 
 .trust-container {

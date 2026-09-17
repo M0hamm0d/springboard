@@ -4,7 +4,9 @@
       <!-- Top Centered Heading -->
       <div class="about-header">
         <span v-reveal class="about-pill">About Springboard Associates</span>
-        <h2 v-reveal="{ delay: 100 }" class="about-headline">Where Ambition Meets Excellence</h2>
+        <h2 v-reveal="{ delay: 100 }" class="about-headline">
+          Where Ambition Meets Excellence
+        </h2>
       </div>
 
       <!-- Asymmetric 5-Block Grid Matching Reference Image -->
@@ -12,7 +14,11 @@
         <!-- Column 1: Stat (Top) + Classroom Photo (Bottom) -->
         <div class="mosaic-col">
           <div v-reveal="{ delay: 100 }" class="card card-navy-stat">
-            <span v-count-up="{ target: 1200, suffix: '+', duration: 1800 }" class="stat-number">1,200+</span>
+            <span
+              v-count-up="{ target: 1200, suffix: '+', duration: 1800 }"
+              class="stat-number"
+              >1,200+</span
+            >
             <p class="stat-caption">
               Associate Accounting Technicians (AATs) and Chartered Accountants
               (ACAs) produced through our structured diets.
@@ -20,10 +26,15 @@
           </div>
           <div v-reveal="{ delay: 250 }" class="card card-image-short">
             <img
-              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80"
+              src="/flier-1.jpeg"
               alt="Students collaborating during review"
               class="grid-img"
             />
+            <!-- <img
+              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80"
+              alt="Students collaborating during review"
+              class="grid-img"
+            /> -->
           </div>
         </div>
 
@@ -51,7 +62,7 @@
         <div class="mosaic-col">
           <div v-reveal="{ delay: 100 }" class="card card-image-short">
             <img
-              src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80"
+              src="/flier-2.jpeg"
               alt="Faculty tutor mentoring candidates"
               class="grid-img"
             />
@@ -102,7 +113,7 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400;1,600&family=DM+Sans:wght@400;500;600;700&display=swap");
 
 * {
   box-sizing: border-box;
@@ -114,7 +125,7 @@ export default {
   width: 100%;
   background-color: #ffffff;
   padding: 88px 24px 96px;
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "DM Sans", "DM Sans Fallback", "DM Sans", system-ui, sans-serif;
   color: #1f2937;
 }
 
@@ -192,7 +203,7 @@ export default {
 }
 
 .stat-number {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "DM Sans", "DM Sans Fallback", "DM Sans", system-ui, sans-serif;
   font-size: 42px;
   font-weight: 800;
   color: #f5e6c8;

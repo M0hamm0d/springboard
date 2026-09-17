@@ -86,7 +86,6 @@ export default {
   name: "NavbarHeader",
   data() {
     return {
-      currentRoute: "home",
       isMobileMenuOpen: false,
       navLinks: [
         { id: "home", label: "Home" },
@@ -98,11 +97,20 @@ export default {
       ],
     };
   },
+  computed: {
+    currentRoute() {
+      // Programme detail pages keep the "Programmes" nav item highlighted
+      const name = this.$route.name === "programme-detail" ? "programmes" : this.$route.name;
+      return name || "home";
+    },
+  },
   methods: {
     navigate(routeId) {
       this.currentRoute = routeId;
       this.isMobileMenuOpen = false;
-      console.log("Navigating to:", routeId);
+      if (this.$route.name !== routeId) {
+        this.$router.push({ name: routeId });
+      }
     },
     toggleMobileMenu() {
       this.isMobileMenuOpen = !this.isMobileMenuOpen;
@@ -116,7 +124,7 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700&display=swap");
 
 * {
   box-sizing: border-box;
@@ -130,7 +138,7 @@ export default {
   top: 0;
   z-index: 1000;
   background-color: #ffffff;
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "DM Sans", "DM Sans Fallback", "DM Sans", system-ui, sans-serif;
   box-shadow: 0 1px 3px rgba(10, 25, 47, 0.05);
 }
 

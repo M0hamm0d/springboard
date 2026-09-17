@@ -4,41 +4,34 @@
       <!-- Section Header -->
       <div v-reveal class="section-header">
         <span class="header-tag">Academic Pathways</span>
-        <h2 class="section-title">Your Journey. Your Level. Your Future.</h2>
+        <h2 class="section-title">Every Stage. One Centre.</h2>
         <p class="section-subtitle">
-          Structured exam preparation designed around each milestone of the
-          ATSWA and ICAN qualification syllabus.
+          Three ATSWA levels and three Professional levels — each with its own
+          structured tuition, mocks and materials.
         </p>
       </div>
 
-      <!-- 6 Programmes Grid (3 cols x 2 rows) -->
+      <!-- 6 Programme Cards -->
       <div class="programmes-grid">
         <div
           v-for="(prog, index) in programmes"
-          :key="index"
+          :key="prog.slug"
           v-reveal="{ delay: (index % 3) * 120 + Math.floor(index / 3) * 200 }"
           class="programme-card"
         >
-          <!-- Card Icon Badge with Soft Accent Disc -->
+          <!-- Icon with Offset Soft Disc -->
           <div class="icon-wrapper">
             <span class="icon-disc"></span>
             <div class="icon-symbol" v-html="prog.icon"></div>
           </div>
 
-          <!-- Programme Meta Tag -->
           <span class="programme-category">{{ prog.category }}</span>
+          <h3 class="programme-title">{{ prog.name }}</h3>
+          <p class="programme-desc">{{ prog.whoFor }}</p>
 
-          <!-- Card Content -->
-          <h3 class="programme-title">{{ prog.title }}</h3>
-          <p class="programme-desc">{{ prog.description }}</p>
-
-          <!-- Action Link -->
-          <a
-            href="#"
-            class="learn-more-link"
-            @click.prevent="openProgramme(prog)"
-          >
-            <span>Learn More</span>
+          <!-- Action Link: real router link to the detail page -->
+          <router-link :to="`/programmes/${prog.slug}`" class="learn-more-link">
+            <span>View Programme</span>
             <svg
               class="arrow-icon"
               width="16"
@@ -53,7 +46,7 @@
               <line x1="5" y1="12" x2="19" y2="12"></line>
               <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
-          </a>
+          </router-link>
         </div>
       </div>
     </div>
@@ -61,61 +54,24 @@
 </template>
 
 <script>
+import { programmes } from "@/data/programmes";
+
+// Card icons per programme (kept here so the data module stays UI-agnostic)
+const icons = {
+  "ats-1": `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A192F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/></svg>`,
+  "ats-2": `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A192F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
+  "ats-3": `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A192F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+  foundation: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A192F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 8 6 4-6 4Z"/></svg>`,
+  skills: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A192F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>`,
+  professional: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A192F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>`,
+};
+
 export default {
-  name: "ProgrammesSection",
+  name: "ProgrammesGrid",
   data() {
     return {
-      programmes: [
-        {
-          category: "ATSWA Stage 1",
-          title: "ATS I",
-          description:
-            "Build your foundation in accounting and begin your professional journey.",
-          icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A192F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/></svg>`,
-        },
-        {
-          category: "ATSWA Stage 2",
-          title: "ATS II",
-          description:
-            "Develop your accounting knowledge and progress toward professional qualification.",
-          icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A192F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
-        },
-        {
-          category: "ATSWA Stage 3",
-          title: "ATS III",
-          description:
-            "Advance your technical knowledge and prepare for the next stage.",
-          icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A192F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
-        },
-        {
-          category: "ICAN Stage 1",
-          title: "FOUNDATION",
-          description:
-            "Start your ICAN journey with a strong academic foundation.",
-          icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A192F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 8 6 4-6 4Z"/></svg>`,
-        },
-        {
-          category: "ICAN Stage 2",
-          title: "SKILLS",
-          description:
-            "Develop the practical knowledge and skills needed for professional success.",
-          icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A192F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>`,
-        },
-        {
-          category: "Final Stage",
-          title: "PROFESSIONAL",
-          description:
-            "Prepare for the professional level with focused tuition and experienced guidance.",
-          icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A192F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>`,
-        },
-      ],
+      programmes: programmes.map((p) => ({ ...p, icon: icons[p.slug] })),
     };
-  },
-  methods: {
-    openProgramme(prog) {
-      // Navigate to the programme's own page
-      this.$router.push(`/programmes/${prog.slug}`);
-    },
   },
 };
 </script>
@@ -142,7 +98,6 @@ export default {
   margin: 0 auto;
 }
 
-/* ================= SECTION HEADER ================= */
 .section-header {
   text-align: center;
   max-width: 680px;
@@ -179,7 +134,6 @@ export default {
   color: #4b5563;
 }
 
-/* ================= 6-CARD GRID ================= */
 .programmes-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -198,7 +152,6 @@ export default {
     transform 0.2s ease,
     box-shadow 0.2s ease,
     border-color 0.2s ease;
-  position: relative;
 }
 
 .programme-card:hover {
@@ -207,7 +160,6 @@ export default {
   box-shadow: 0 12px 28px -8px rgba(10, 25, 47, 0.08);
 }
 
-/* --- Icon with Offset Soft Disc (Reference Image Style) --- */
 .icon-wrapper {
   position: relative;
   width: 48px;
@@ -227,6 +179,11 @@ export default {
   top: -4px;
   right: -6px;
   z-index: 1;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.programme-card:hover .icon-disc {
+  transform: scale(1.2);
 }
 
 .icon-symbol {
@@ -235,9 +192,13 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.3s ease;
 }
 
-/* --- Card Details --- */
+.programme-card:hover .icon-symbol {
+  transform: translateY(-2px);
+}
+
 .programme-category {
   font-size: 11px;
   font-weight: 700;
@@ -248,7 +209,6 @@ export default {
 }
 
 .programme-title {
-  font-family: "DM Sans", "DM Sans Fallback", "DM Sans", system-ui, sans-serif;
   font-size: 20px;
   font-weight: 700;
   color: #0a192f;
@@ -264,7 +224,6 @@ export default {
   flex-grow: 1;
 }
 
-/* --- CTA Action Link --- */
 .learn-more-link {
   display: inline-flex;
   align-items: center;
@@ -282,10 +241,6 @@ export default {
   transition: transform 0.2s ease;
 }
 
-.learn-more-link:hover {
-  color: #1e3a8a;
-}
-
 .programme-card:hover .learn-more-link {
   color: #1e3a8a;
 }
@@ -294,7 +249,15 @@ export default {
   transform: translateX(4px);
 }
 
-/* ================= RESPONSIVE ================= */
+@media (prefers-reduced-motion: reduce) {
+  .programme-card,
+  .icon-disc,
+  .icon-symbol,
+  .arrow-icon {
+    transition: none;
+  }
+}
+
 @media (max-width: 992px) {
   .programmes-grid {
     grid-template-columns: repeat(2, 1fr);

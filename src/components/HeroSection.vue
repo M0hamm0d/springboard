@@ -140,15 +140,15 @@ export default {
       console.log("Navigate to enrollment");
     },
     handleExplore() {
-      // Add programmes scroll/route
-      console.log("Navigate to programmes");
+      // Navigate to the programmes page
+      this.$router.push("/programmes");
     },
   },
 };
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600;700&display=swap");
 
 * {
   box-sizing: border-box;
@@ -161,9 +161,10 @@ export default {
   background-color: #ffffff;
   padding: 56px 24px 80px;
   font-family:
-    "Plus Jakarta Sans",
-    -apple-system,
-    BlinkMacSystemFont,
+    "DM Sans",
+    "DM Sans Fallback",
+    "DM Sans",
+    system-ui,
     sans-serif;
   color: #1f2937;
 }
@@ -236,7 +237,7 @@ export default {
 }
 
 .btn {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "DM Sans", "DM Sans Fallback", "DM Sans", system-ui, sans-serif;
   font-size: 14px;
   font-weight: 600;
   padding: 12px 24px;

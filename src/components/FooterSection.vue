@@ -91,14 +91,16 @@ export default {
   name: "MainFooter",
   methods: {
     navigate(target) {
-      console.log("Navigate to:", target);
+      if (this.$route.name !== target) {
+        this.$router.push({ name: target });
+      }
     },
   },
 };
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap");
 
 * {
   box-sizing: border-box;
@@ -118,9 +120,10 @@ img {
   border-top: 1px solid #e9dfce;
   padding: 72px 24px 36px;
   font-family:
-    "Plus Jakarta Sans",
-    -apple-system,
-    BlinkMacSystemFont,
+    "DM Sans",
+    "DM Sans Fallback",
+    "DM Sans",
+    system-ui,
     sans-serif;
   color: #1f2937;
 }

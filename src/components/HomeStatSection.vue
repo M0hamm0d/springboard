@@ -131,7 +131,7 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@400;500;600;700;800&display=swap");
 
 * {
   box-sizing: border-box;
@@ -143,7 +143,7 @@ export default {
   width: 100%;
   background-color: #0a192f; /* Deep Navy institutional anchor */
   padding: 88px 24px 96px;
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "DM Sans", "DM Sans Fallback", "DM Sans", system-ui, sans-serif;
   color: #ffffff;
 }
 
@@ -253,7 +253,7 @@ export default {
 }
 
 .metric-number {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "DM Sans", "DM Sans Fallback", "DM Sans", system-ui, sans-serif;
   font-size: 44px;
   font-weight: 800;
   letter-spacing: -0.03em;

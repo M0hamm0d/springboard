@@ -1,38 +1,50 @@
 <template>
-  <section class="final-cta-section">
+  <section class="programmes-cta-section">
     <div class="cta-container">
       <div v-reveal:zoom class="cta-card">
-        <!-- Subtle Institutional Watermark/Pattern in Background -->
         <div class="cta-glow-disc"></div>
 
         <div class="cta-content">
-          <!-- Overline Badge -->
-          <span class="cta-pill">Admissions Open For Upcoming Diet</span>
+          <span class="cta-pill">Still Deciding?</span>
 
-          <!-- Main Climax Headline -->
           <h2 class="cta-headline">
-            Ready to Take the Next Step in Your <br />
-            <span>Accounting Career?</span>
+            Have Questions <br />
+            <span>About Eligibility?</span>
           </h2>
 
-          <!-- Descriptive Subtext -->
           <p class="cta-subtext">
-            Join Springboard Associates SATC and learn from experienced tutors
-            in an environment built around excellence. Secure your lectures,
-            study packs, and mock exam slots today.
+            Entry rules and exemptions can vary with each ICAN diet. Check our
+            FAQs for quick answers, or message us directly and we'll help you
+            map your pathway.
           </p>
 
-          <!-- Button Actions -->
           <div class="cta-actions">
-            <button class="btn btn-cream" @click="handleEnroll">
-              Enroll Now
-            </button>
-            <button class="btn btn-outline" @click="handleContact">
-              Contact Us
-            </button>
+            <a class="btn btn-cream" href="#" @click.prevent="handleFaq">
+              See Our FAQs
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <a
+              class="btn btn-outline"
+              :href="whatsappHref"
+              target="_blank"
+              rel="noopener"
+            >
+              Ask on WhatsApp
+            </a>
           </div>
 
-          <!-- Bottom Micro-Trust Bar -->
           <div class="cta-trust-row">
             <div class="trust-pill">
               <svg
@@ -47,7 +59,7 @@
               >
                 <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
-              <span>ICAN Accredited Tuition</span>
+              <span>Free Eligibility Guidance</span>
             </div>
             <span class="trust-sep">•</span>
             <div class="trust-pill">
@@ -63,23 +75,7 @@
               >
                 <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
-              <span>Physical & Virtual Classes</span>
-            </div>
-            <span class="trust-sep">•</span>
-            <div class="trust-pill">
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              <span>Installment Plans Available</span>
+              <span>Exemption Advice for AATs & Graduates</span>
             </div>
           </div>
         </div>
@@ -89,14 +85,21 @@
 </template>
 
 <script>
+import { waLink } from "@/data/programmes";
+
 export default {
-  name: "FinalCtaSection",
-  methods: {
-    handleEnroll() {
-      console.log("Navigate to enrollment application");
+  name: "ProgrammesCTA",
+  computed: {
+    whatsappHref() {
+      return waLink(
+        "Hello Springboard! I have a question about programme eligibility."
+      );
     },
-    handleContact() {
-      console.log("Navigate or scroll to contact section");
+  },
+  methods: {
+    handleFaq() {
+      // Placeholder until the FAQs page exists (V2)
+      console.log("Navigate to FAQs page");
     },
   },
 };
@@ -111,7 +114,7 @@ export default {
   padding: 0;
 }
 
-.final-cta-section {
+.programmes-cta-section {
   width: 100%;
   background-color: #ffffff;
   padding: 60px 24px 100px;
@@ -123,7 +126,6 @@ export default {
   margin: 0 auto;
 }
 
-/* Large Navy Card Container */
 .cta-card {
   background-color: #0a192f;
   border-radius: 24px;
@@ -135,7 +137,6 @@ export default {
   box-shadow: 0 20px 40px -15px rgba(10, 25, 47, 0.18);
 }
 
-/* Soft Warm Glow Behind Text */
 .cta-glow-disc {
   position: absolute;
   top: -120px;
@@ -143,12 +144,23 @@ export default {
   transform: translateX(-50%);
   width: 500px;
   height: 350px;
-  /* background: radial-gradient(
+  background: radial-gradient(
     circle,
-    rgba(245, 230, 200, 0.08) 0%,
+    rgba(245, 230, 200, 0.07) 0%,
     rgba(10, 25, 47, 0) 70%
-  ); */
+  );
+  animation: glow-breathe 6s ease-in-out infinite;
   pointer-events: none;
+}
+
+@keyframes glow-breathe {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 .cta-content {
@@ -158,7 +170,6 @@ export default {
   margin: 0 auto;
 }
 
-/* Overline Badge */
 .cta-pill {
   display: inline-block;
   font-size: 11px;
@@ -173,7 +184,6 @@ export default {
   margin-bottom: 24px;
 }
 
-/* Headline */
 .cta-headline {
   font-family: "Cormorant Garamond", Georgia, serif;
   font-size: 52px;
@@ -190,7 +200,6 @@ export default {
   color: #f5e6c8;
 }
 
-/* Subtitle */
 .cta-subtext {
   font-size: 16px;
   line-height: 1.65;
@@ -201,7 +210,6 @@ export default {
   margin-right: auto;
 }
 
-/* Button Group */
 .cta-actions {
   display: flex;
   justify-content: center;
@@ -220,6 +228,18 @@ export default {
   cursor: pointer;
   transition: all 0.2s ease;
   border: 1px solid transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.btn svg {
+  transition: transform 0.2s ease;
+}
+
+.btn:hover svg {
+  transform: translateX(4px);
 }
 
 .btn-cream {
@@ -246,7 +266,6 @@ export default {
   transform: translateY(-1px);
 }
 
-/* Micro-Trust Strip Below Buttons */
 .cta-trust-row {
   display: flex;
   align-items: center;
@@ -275,11 +294,17 @@ export default {
   font-size: 12px;
 }
 
-/* ================= RESPONSIVE ================= */
+@media (prefers-reduced-motion: reduce) {
+  .cta-glow-disc {
+    animation: none;
+  }
+}
+
 @media (max-width: 768px) {
-  .final-cta-section {
+  .programmes-cta-section {
     padding: 60px 0px 100px;
   }
+
   .cta-card {
     padding: 56px 20px;
     border-radius: 18px;
@@ -287,10 +312,6 @@ export default {
 
   .cta-headline {
     font-size: 38px;
-  }
-
-  .cta-subtext {
-    font-size: 14px;
   }
 
   .cta-actions {
@@ -301,6 +322,7 @@ export default {
 
   .btn {
     width: 100%;
+    justify-content: center;
   }
 
   .cta-trust-row {
